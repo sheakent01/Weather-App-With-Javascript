@@ -1,4 +1,3 @@
-// Tutorial by http://youtube.com/CodeExplained
 // api key : 82005d27a116c2880c8f0fcb866998a0
 
 //SELECT ELEMENTS
@@ -23,26 +22,21 @@ const weather = {
 
 //Display Weather to UI
 displayWeather(){
-iconElement.innerHTML =
-    <img src ="icons/${weather.iconId}.png"/>;
-
-tempElement.innerHTML = 29° C
-     ${weather.temperature.value}°<span>C</span>;
-
-descElement.innerHTML =
-     weather.description;
-
-locationElement.innerHTML =
-     ${weather.city}, ${weather.country};
-
-    }
-
-function celsiusToFahrenheit(temperature){
-    (temperature * 9/5) + 32;
+iconElement.innerHTML = <img src ="icons/${weather.iconId}.png"/>;
+tempElement.innerHTML = ${weather.temperature.value}°<span>C</span>;
+descElement.innerHTML = weather.description;
+locationElement.innerHTML = ${weather.city}, ${weather.country};
 }
 
+//Celsius to Farenheit conversion
+function celsiusToFahrenheit(temperature){
+    return (temperature * 9/5) + 32;
+}
+
+//When user clicks on temp element
 tempElement.addEventListener("click", function(){
     if(weather.temperature.value === undefined) return;
+
     if(weather.temperature.unit === "celsius"){
         let fahrenheit = celsiusToFahrenheit(weather.temperature.value);
         fahrenheit = Math.floor(fahrenheit);
@@ -52,8 +46,8 @@ tempElement.addEventListener("click", function(){
     }else{
    
         tempElement.innerHTML = ${weather.temperature.value}° <span>C</span>;
+        weather.temperature.unit = "celsius"
     }
-}
 });
 
 //Check if browser supports geolocation
