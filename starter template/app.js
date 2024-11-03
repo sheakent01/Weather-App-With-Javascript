@@ -4,21 +4,16 @@
 const notificationElement = document.querySelector(".notification");
 const iconElement = document.querySelector(".weather-icon");
 const tempElement = document.querySelector(".temperature-value p");
-const descElementElement = document.querySelector(".temperature-description p");
+const descElement = document.querySelector(".temperature-description p");
 const locationElement = document.querySelector(".location p");
 
 //App Data
-const weather = {
+const weather = {};
 
-      temperature : {
-        value : 18,
-        unit : "celsius"
-      },
-      description : "few clouds",
-      iconId : "01d",
-      city : "London",
-      country : "GB"
-};
+weather.temperature = {
+    unit:"celsius"
+}
+
 
 //Display Weather to UI
 displayWeather(){
@@ -71,6 +66,7 @@ function showError(error) {
   notificationElement.innerHTML=<p> ${error.message} </p>;
 }
 
+//App Consts and vars
 const KELVIN = 273;
 //API Key
 const key = "82005d27a116c2880c8f0fcb866998a0";
