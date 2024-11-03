@@ -21,17 +21,18 @@ const weather = {
       country : "GB"
 };
 
+//Display Weather to UI
 displayWeather(){
 iconElement.innerHTML =
     <img src ="icons/${weather.iconId}.png"/>;
 
 tempElement.innerHTML = 29° C
-     ${weather.temperature.value} ° <span>C</span>;
+     ${weather.temperature.value}°<span>C</span>;
 
-descElement.innerHTML = Clear sky
+descElement.innerHTML =
      weather.description;
 
-locationElement.innerHTML = London, GB 
+locationElement.innerHTML =
      ${weather.city}, ${weather.country};
 
     }
@@ -84,5 +85,17 @@ const key = "82005d27a116c2880c8f0fcb866998a0";
 function getWeather(latitude, longitude){
     let api = "http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}";
     fetch(api)
-    .then(function(response))
+    .then(function(response){
+        let data = response.json();
+        return data;
+    })
+    .then(function(data){
+        weather.temperature.value = Math.floor(data.main.temp - KELVIN);
+        weather.description = data.weather[0].description;
+        weather.iconID = data.name;
+        weather.country = data.sys.country;
+    })
+    .then(function(){
+        displayWeather();
+    })
 }
