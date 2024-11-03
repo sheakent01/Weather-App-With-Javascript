@@ -1,11 +1,14 @@
 // Tutorial by http://youtube.com/CodeExplained
 // api key : 82005d27a116c2880c8f0fcb866998a0
+
+//SELECT ELEMENTS
 const notificationElement = document.querySelector(".notification");
 const iconElement = document.querySelector(".weather-icon");
 const tempElement = document.querySelector(".temperature-value p");
 const descElementElement = document.querySelector(".temperature-description p");
 const locationElement = document.querySelector(".location p");
 
+//App Data
 const weather = {
 
       temperature : {
@@ -52,6 +55,7 @@ tempElement.addEventListener("click", function(){
 }
 });
 
+//Check if browser supports geolocation
 if("geolocation" in navigator){
     navigator.geolocation.getCurrentPosition(setPosition, showError);
 }else{
@@ -59,22 +63,25 @@ if("geolocation" in navigator){
     notificationElement.innerHTML = "<p>Browser Doesn't Support Geolocation.</p>"
 }
 
+//Set User's Position
 function setPosition(position){
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
     getWeather(latitude.longtidue);
 }
 
+//Show error when there is an issue with Geolocation
 function showError(error) {
   notificationElement.style.display = "block";
   notificationElement.innerHTML=<p> ${error.message} </p>;
 }
 
 const KELVIN = 273;
+//API Key
+const key = "82005d27a116c2880c8f0fcb866998a0";
 
-const key = "";
-
+//Get weather from API provider
 function getWeather(latitude, longitude){
-    let api = 
+    let api = "http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}"
     fetch(api)
 }
